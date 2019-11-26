@@ -1,22 +1,22 @@
-const { resolve } = require('path');
-const webpack = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const { resolve } = require("path");
+const webpack = require("webpack");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 const files = [
   {
-    outputName: 'react-id-swiper',
-    entryName: 'ReactIdSwiper'
+    outputName: "hello",
+    entryName: "hello"
   },
   {
-    outputName: 'react-id-swiper.min',
-    entryName: 'ReactIdSwiper',
+    outputName: "hello.min",
+    entryName: "hello",
     minimizer: true
   }
 ];
 
 const PATHS = {
-  src: resolve(__dirname, 'src'),
-  output: resolve(__dirname, 'lib')
+  src: resolve(__dirname, "src"),
+  output: resolve(__dirname, "lib")
 };
 
 module.exports = files.map(({ entryName, outputName, minimizer }) => ({
@@ -24,34 +24,34 @@ module.exports = files.map(({ entryName, outputName, minimizer }) => ({
   output: {
     path: PATHS.output,
     filename: `${outputName}.js`,
-    libraryTarget: 'umd',
-    library: 'ReactIdSwiper',
-    auxiliaryComment: ''
+    libraryTarget: "umd",
+    library: "__module_hello",
+    auxiliaryComment: ""
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-    modules: ['./src', 'node_modules']
+    extensions: [".tsx", ".ts", ".js"],
+    modules: ["./src", "node_modules"]
   },
   resolveLoader: {
-    moduleExtensions: ['-loader']
+    moduleExtensions: ["-loader"]
   },
   module: {
     rules: [
       {
         test: /\.ts(x)?$/,
-        loader: 'awesome-typescript',
+        loader: "awesome-typescript",
         include: [PATHS.src],
         options: {
-          configFileName: 'tsconfig.standalone.json'
+          configFileName: "tsconfig.standalone.json"
         }
       }
     ]
   },
   externals: {
-    react: 'React',
-    swiper: 'Swiper'
+    react: "React",
+    swiper: "Swiper"
   },
-  mode: 'production',
+  mode: "production",
   optimization: {
     minimizer: minimizer
       ? [
@@ -67,8 +67,8 @@ module.exports = files.map(({ entryName, outputName, minimizer }) => ({
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
+      "process.env": {
+        NODE_ENV: JSON.stringify("production")
       }
     })
   ]
